@@ -1,0 +1,17 @@
+
+hpeesofsim (*) 511.update1.0 Nov 21 2019, MINT version 5
+    (64-bit windows built: Fri Nov 22, 2019 03:45:24 +0000)
+
+Pt DC convergence is used.
+
+.
+
+
+TRAN Tran1[1] <TDR_Guide_Simulations_lib:TDR_3_Discontinuities:schematic>   time=(0 s->100 ns)
+Warning detected by hpeesofsim during TRAN analysis `Tran1'.
+    Maximum timestep reduced to half of shortest transmission line delay  3.000e-09.
+
+
+Resource usage:
+  Total stopwatch time     =     1.02 seconds.
+

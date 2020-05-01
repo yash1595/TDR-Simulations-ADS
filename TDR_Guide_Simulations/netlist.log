@@ -1,0 +1,74 @@
+; Top Design: "TDR_Guide_Simulations_lib:TDR_Masking:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="TDR_Guide_Simulations_lib:TDR_Masking:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+V_Source:SRC1  N__19 0 Type="VtPulse" V_Tran=erf_pulse(time, 0 V,2 V,0 nsec,35 psec,1 nsec,3 msec,10 msec) SaveCurrent=1 
+R:Rterm  0 N__17 R=50 Ohm Noise=yes 
+R:Rth  N__19 V_TDR1 R=50 Ohm Noise=yes 
+#uselib "ckt" , "TLIND"
+TLIND:TLD3  V_TDR1 N__15 Z=50 Ohm Delay=3 nsec 
+Tran:Tran1 StartTime=0.0 nsec StopTime=100 nsec MaxTimeStep=10.0 nsec LimitStepForTL=yes TimeStepControl=2 TruncTol=7.0 ChargeTol=1.0e-14 IntegMethod=0 MaxGearOrder=2 \
+Mu=0.5 MaxOrder=4 Freq[1]=1.0 GHz Order[1]=3 HB_Window=no \
+HB_Sol=no ImpApprox=no ShortTL_Delay=1.0 psec ImpMode=1 UseInitCond=no \
+LoadGminDC=no CheckKCL=yes CheckOnlyDeltaV=yes OverloadAlert=no DeviceBypass=no \
+MaxIters=10 MaxItersDC=200 DevOpPtLevel=0 StatusLevel=2 OutputAllPoints=yes \
+NoiseScale=1 ImpEnforcePassivity=yes \
+OutputPlan="Tran1_Output" 
+
+OutputPlan:Tran1_Output \
+      Type="Output" \
+      UseNodeNestLevel=yes \
+      NodeNestLevel=2 \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2 \
+      UseDeviceCurrentNestLevel=no \
+      DeviceCurrentNestLevel=0 \
+      DeviceCurrentDeviceType="All" \
+      DeviceCurrentSymSyntax=yes \
+      UseCurrentNestLevel=yes \
+      CurrentNestLevel=999 \
+      UseDeviceVoltageNestLevel=no \
+      DeviceVoltageNestLevel=0 \
+      DeviceVoltageDeviceType="All"
+
+#uselib "ckt" , "TLIND"
+TLIND:TLD4  N__15 N__16 Z=30 Ohm Delay=3 nsec 
+aele rho=((V_TDR1-1)/1);
+aele ZMask=50*((1+rho)/(1-rho));
+#uselib "ckt" , "TLIND"
+TLIND:TLD5  N__16 N__17 Z=50 Ohm Delay=3 nsec 
+aele rho2=((V_TDR2-1)/1);
+aele ZMask2=50*((1+rho2)/(1-rho2));
+V_Source:SRC2  N__10 0 Type="VtPulse" V_Tran=erf_pulse(time, 0 V,2 V,0 nsec,35 psec,1 nsec,3 msec,10 msec) SaveCurrent=1 
+R:Rterm1  0 N__14 R=50 Ohm Noise=yes 
+R:Rth1  N__10 V_TDR2 R=50 Ohm Noise=yes 
+#uselib "ckt" , "TLIND"
+TLIND:TLD6  N__13 N__14 Z=50 Ohm Delay=3 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD7  N__12 N__13 Z=10 Ohm Delay=3 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD8  V_TDR2 N__12 Z=50 Ohm Delay=3 nsec 
+aele rho3=((V_TDR3-1)/1);
+aele ZMask3=50*((1+rho3)/(1-rho3));
+V_Source:SRC3  N__5 0 Type="VtPulse" V_Tran=erf_pulse(time, 0 V,2 V,0 nsec,35 psec,1 nsec,3 msec,10 msec) SaveCurrent=1 
+R:Rterm2  0 N__9 R=50 Ohm Noise=yes 
+R:Rth2  N__5 V_TDR3 R=50 Ohm Noise=yes 
+#uselib "ckt" , "TLIND"
+TLIND:TLD9  N__8 N__9 Z=50 Ohm Delay=3 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD10  N__7 N__8 Z=40 Ohm Delay=3 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD11  V_TDR3 N__7 Z=50 Ohm Delay=3 nsec 
+aele rho4=((V_TDR4-1)/1);
+aele ZMask4=50*((1+rho4)/(1-rho4));
+V_Source:SRC4  N__0 0 Type="VtPulse" V_Tran=erf_pulse(time, 0 V,2 V,0 nsec,35 psec,1 nsec,3 msec,10 msec) SaveCurrent=1 
+R:Rterm3  0 N__4 R=50 Ohm Noise=yes 
+R:Rth3  N__0 V_TDR4 R=50 Ohm Noise=yes 
+#uselib "ckt" , "TLIND"
+TLIND:TLD12  N__3 N__4 Z=50 Ohm Delay=3 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD13  N__2 N__3 Z=30 Ohm Delay=1.5 nsec 
+#uselib "ckt" , "TLIND"
+TLIND:TLD14  V_TDR4 N__2 Z=50 Ohm Delay=3 nsec 

@@ -1,0 +1,4 @@
+INCLUDE $HPEESOF_DIR/oalibs/analog_rf.defs
+INCLUDE $HPEESOF_DIR/oalibs/dsp.defs
+DEFINE TDR_Guide_Simulations_lib TDR_Guide_Simulations_lib
+ASSIGN TDR_Guide_Simulations_lib libMode shared
